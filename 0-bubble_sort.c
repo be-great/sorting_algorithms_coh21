@@ -1,6 +1,5 @@
 #include "sort.h"
 
-void swapNodes(listint_t *node1, listint_t *node2);
 
 /**
  * bubble_sort - a function that sorts an array of integers
