@@ -34,22 +34,23 @@ listint_t *create_listint(const int *array, size_t size)
 }
 
 /**
- * main - Entry point
- *
- * Return: Always 0
- */
+* main - Entry point
+*
+* Return: Always 0
+*/
 int main(void)
 {
-    listint_t *list;
-    int array[] = {-9000000,898, 1875, 5120, 6542, 9468};
-    size_t n = sizeof(array) / sizeof(array[0]);
+	listint_t *list;
+	int array[] = {-9000000, 898, 1875, 5120, 6542, 9468};
 
-    list = create_listint(array, n);
+	size_t n = sizeof(array) / sizeof(array[0]);
+
+	list = create_listint(array, n);
 	list = NULL;
-    print_list(list);
-    printf("\n");
-    insertion_sort_list(&list);
-    printf("\n");
-    print_list(list);
-    return (0);
+	print_list(list);
+	printf("\n");
+	insertion_sort_list(&list);
+	printf("\n");
+	print_list(list);
+	return (0);
 }
