@@ -1,5 +1,4 @@
 #include "sort.h"
-
 /**
 * swap - Swaps two integers.
 * @a: Pointer to the first integer.
@@ -32,13 +31,20 @@ int lomuto_partition(int *array, int low, int high, size_t size)
 		if (array[j] < pivot)
 		{
 			i++;
-			swap(&array[i], &array[j]);
-
+			if (i != j)
+			{
+				swap(&array[i], &array[j]);
+				print_array(array, size);
+			}
 		}
 	}
 
-	swap(&array[i + 1], &array[high]);
-	print_array(array, size);
+	if (i + 1 != high)
+	{
+		swap(&array[i + 1], &array[high]);
+		print_array(array, size);
+	}
+
 	return (i + 1);
 }
 
@@ -60,18 +66,13 @@ void quick_sort_helper(int *array, int low, int high, size_t size)
 	}
 }
 
-
 /**
-* quick_sort - function that sorts an array
-* of integers in ascending order using the Quick
-* sort algorithm
-* @array: the array to sort using quick sort
-* @size: the size of the array
-* Return: void
+* quick_sort - Sorts an array of integers in ascending order using Quick Sort.
+* @array: Array to be sorted.
+* @size: Size of the array.
 */
 void quick_sort(int *array, size_t size)
 {
-
 	if (array == NULL || size <= 1)
 	{
 		return;
