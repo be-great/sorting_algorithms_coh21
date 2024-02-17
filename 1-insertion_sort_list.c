@@ -5,6 +5,7 @@
 * using the Insertion sort algorithm
 * @list: double pointer to the head of the list
 */
+
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *current, *prev, *next;
