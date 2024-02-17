@@ -41,7 +41,7 @@ listint_t *create_listint(const int *array, size_t size)
 int main(void)
 {
 	listint_t *list;
-	int array[] = {48, 99, 71};
+	int array[] = {19, 48, 99, 71, 13, 52, 96, 73, 86, 7};
 
 	size_t n = sizeof(array) / sizeof(array[0]);
 
@@ -54,47 +54,5 @@ int main(void)
 	printf("\n");
 	print_list(list);
 	list = NULL;
-
-	/**Case 1*/
-	printf("Case 1\n");
-	int array0[] = {24,25};
-
-	n = sizeof(array0) / sizeof(array0[0]);
-
-	list = create_listint(array0, n);
-	if (!list)
-		return (1);
-	print_list(list);
-	printf("\n");
-	insertion_sort_list(&list);
-	printf("\n");
-	print_list(list);
-	list = NULL;
-	/**Case 2*/
-	printf("Case 2\n");
-	int array1[] = {};
-
-	n = sizeof(array1) / sizeof(array1[0]);
-
-	list = create_listint(array1, n);
-	print_list(list);
-	printf("\n");
-	insertion_sort_list(&list);
-	printf("\n");
-	print_list(list);
-	/**Case 3*/
-	printf("Case 3\n");
-	int array2[] = {24,12,12, 1};
-
-	n = sizeof(array2) / sizeof(array2[0]);
-
-	list = create_listint(array2, n);
-	if (!list)
-		return (1);
-	print_list(list);
-	printf("\n");
-	insertion_sort_list(&list);
-	printf("\n");
-	print_list(list);
 	return (0);
 }
