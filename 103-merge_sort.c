@@ -14,11 +14,6 @@ void merge(int *array, int left, int parition, int right)
 
 	arr_l = _calloc(n1, sizeof(int));
 	arr_r = _calloc(n2, sizeof(int));
-	if (arr_l == NULL || arr_r == NULL)
-	{
-		free(arr_l), free(arr_r);
-		exit(EXIT_FAILURE);
-	}
 	/**copy the arr part*/
 	for (i = 0; i < n1; i++)
 		arr_l[i] = array[left + i];
