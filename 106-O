@@ -1,3 +1,3 @@
-O(log^2n)
-O(log^2n)
-O(nlog^2n)
+O(log^2(n))
+O(log^2(n))
+O(nlog^2(n))
