@@ -19,10 +19,6 @@ void merge(int *array, int left, int parition, int right)
 		arr_l[i] = array[left + i];
 	for (i = 0; i < n2; i++)
 		arr_r[i] = array[parition + 1 + i];
-	printf("[left]: ");
-	print_array(arr_l, n1);
-	printf("[right]: ");
-	print_array(arr_r, n2);
 	i = 0, j = 0, k = left;
 	while (i < n1 && j < n2)
 	{
@@ -37,9 +33,13 @@ void merge(int *array, int left, int parition, int right)
 		array[k] = arr_l[i], i++, k++;
 	while (j < n2)
 		array[k] = arr_r[j], j++, k++;
-	free(arr_l), free(arr_r);
+	printf("[left]: ");
+	print_array(arr_l, n1);
+	printf("[right]: ");
+	print_array(arr_r, n2);
 	printf("[Done]: ");
 	print_array(&array[left], i + j);
+	free(arr_l), free(arr_r);
 }
 /**
 * parition_part - partion the array
@@ -72,6 +72,8 @@ void parition_part(int *array, int left, int right)
 */
 void merge_sort(int *array, size_t size)
 {
+	if (array == NULL || size < 2)
+		return;
 
 	parition_part(array, 0, size - 1);
 
