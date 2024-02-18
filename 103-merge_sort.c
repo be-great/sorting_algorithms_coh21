@@ -6,14 +6,15 @@
 * @left: the left part
 * @parition: the medium
 * @right: the right part
+* @arr_l_r: the array to mainplate
 */
-void merge(int *array, int left, int parition, int right)
+void merge(int *array, int left, int parition, int right, int *arr_l_r)
 {
 	int i, j, k, n1 = parition - left + 1;
 	int n2 = right - parition, *arr_l, *arr_r;
 
-	arr_l = _calloc(n1, sizeof(int));
-	arr_r = _calloc(n2, sizeof(int));
+	arr_l = &arr_l_r[0];
+	arr_r = &arr_l_r[n2];
 	/**copy the arr part*/
 	for (i = 0; i < n1; i++)
 		arr_l[i] = array[left + i];
@@ -34,35 +35,36 @@ void merge(int *array, int left, int parition, int right)
 	while (j < n2)
 		array[k] = arr_r[j], j++, k++;
 	printf("[left]: ");
-	print_array(arr_l, n1);
+	print_array(arr_l, i);
 	printf("[right]: ");
-	print_array(arr_r, n2);
+	print_array(arr_r, j);
 	printf("[Done]: ");
 	print_array(&array[left], i + j);
-	free(arr_l), free(arr_r);
 }
 /**
 * parition_part - partion the array
 * @array: the array
 * @left: the left part
 * @right: the right part
+* @arr_l_r: the array to mainplate
 */
-void parition_part(int *array, int left, int right)
+void parition_part(int *array, int left, int right, int *arr_l_r)
 {
 
 	int partion;
 
-	if (left < right)
+	if ((left + right) % 2 == 0)
+		partion = ((left + right) / 2) - 1;
+	else
+		partion = (left + right) / 2;
+	if (partion >= left)
 	{
-		partion = left + (right - left) / 2;
-
-		parition_part(array, left, partion);
-		parition_part(array, partion + 1, right);
+		parition_part(array, left, partion, arr_l_r);
+		parition_part(array, partion + 1, right, arr_l_r);
 		printf("Merging...\n");
-		merge(array, left, partion, right);
+		merge(array, left, partion, right, arr_l_r);
 
 	}
-
 }
 /**
 * merge_sort - function that sorts an array of integers
@@ -72,11 +74,14 @@ void parition_part(int *array, int left, int right)
 */
 void merge_sort(int *array, size_t size)
 {
+	int *arr_l_r;
+
 	if (array == NULL || size < 2)
 		return;
 
-	parition_part(array, 0, size - 1);
-
+	arr_l_r = _calloc(size, sizeof(int));
+	parition_part(array, 0, size - 1, arr_l_r);
+	free(arr_l_r);
 }
 
 /**
@@ -109,3 +114,4 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 	}
 	return (ptr);
 }
+
