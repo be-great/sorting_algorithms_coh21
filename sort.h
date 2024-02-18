@@ -33,4 +33,6 @@ void counting_sort(int *array, size_t size);
 int check_max(int *array, size_t size);
 void heap_sort(int *array, size_t size);
 
+/*helping functions*/
+void *_calloc(unsigned int nmemb, unsigned int size);
 #endif /*SORT_H*/

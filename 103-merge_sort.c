@@ -12,8 +12,8 @@ void merge(int *array, int left, int parition, int right)
 	int i, j, k, n1 = parition - left + 1;
 	int n2 = right - parition, *arr_l, *arr_r;
 
-	arr_l = malloc(sizeof(int) * n1);
-	arr_r = malloc(sizeof(int) * n2);
+	arr_l = _calloc(n1, sizeof(int));
+	arr_r = _calloc(n2, sizeof(int));
 	if (arr_l == NULL || arr_r == NULL)
 	{
 		free(arr_l), free(arr_r);
@@ -32,29 +32,19 @@ void merge(int *array, int left, int parition, int right)
 	while (i < n1 && j < n2)
 	{
 		if (arr_l[i] <= arr_r[j])
-		{
-			array[k] = arr_l[i];
-			i++;
-		}
+			array[k] = arr_l[i], i++;
 		else
-		{
-			array[k] = arr_r[j];
-			j++;
-		} k++;
+			array[k] = arr_r[j], j++;
+		k++;
 	}
 	/**coping the remaining elements*/
 	while (i < n1)
-	{
-		array[k] = arr_l[i];
-		i++, k++;
-	}
+		array[k] = arr_l[i], i++, k++;
 	while (j < n2)
-	{
-		array[k] = arr_r[j];
-		j++, k++;
-	} free(arr_l), free(arr_r);
+		array[k] = arr_r[j], j++, k++;
+	free(arr_l), free(arr_r);
 	printf("[Done]: ");
-	print_array(array, k);
+	print_array(&array[left], i + j);
 }
 /**
 * parition_part - partion the array
@@ -90,4 +80,35 @@ void merge_sort(int *array, size_t size)
 
 	parition_part(array, 0, size - 1);
 
+}
+
+/**
+ * *_calloc - function that allocates memory for an array, using malloc
+ * Discription: creating calloc function , locate memory spaces
+ * with initlize of 0 values not random values like malloc
+ * @nmemb: number of array elements
+ * @size:size of the array elements value
+ * Return: pointer to the new located empty memory
+ */
+void *_calloc(unsigned int nmemb, unsigned int size)
+{
+	char *ptr;
+	int len;
+	int i = 0;
+
+	if (nmemb <= 0 || size <= 0)
+		return (NULL);
+	ptr = malloc(nmemb * size);/*WRONG*/
+
+	if (ptr == NULL)
+		return (NULL);
+
+	len = nmemb * size;
+
+	while (i < len)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+	return (ptr);
 }
