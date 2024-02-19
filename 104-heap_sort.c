@@ -18,24 +18,26 @@ void swap(int *a, int *b)
  * sift_down - a function for handling the sift_down implementation
  * @array: the array
  * @size: the size of the array
- * @i: the index
+ * @root: the root index of the array
+ * @heap_size: the size of the heap
 */
-void sift_down(int *array, size_t size, int i)
+void sift_down(int *array, size_t size, int root, size_t heap_size)
 {
-	int biggest = i;
-	size_t left = 2 * i + 1;
-	size_t right = 2 * i + 2;
+	int biggest = root;
+	size_t left = 2 * root + 1;
+	size_t right = 2 * root + 2;
 
-	if (left < size && array[left] > array[biggest])
+	if (left < heap_size && array[left] > array[biggest])
 		biggest = left;
 
-	if (right < size && array[right] > array[biggest])
+	if (right < heap_size && array[right] > array[biggest])
 		biggest = right;
 
-	if (biggest != i)
+	if (biggest != root)
 	{
-		swap(&array[i], &array[biggest]);
-		sift_down(array, size, biggest);
+		swap(&array[root], &array[biggest]);
+		print_array(array, size);
+		sift_down(array, size, biggest, heap_size);
 	}
 }
 
@@ -54,17 +56,20 @@ void heap_sort(int *array, size_t size)
 {
 	int i;
 
+	if (array == NULL || size < 2)
+		return;
+
 	/*Build the heap max*/
 	for (i = size / 2 - 1; i >= 0; i--)
 	{
-		sift_down(array, size, i);
+		sift_down(array, size, i, size);
 	}
 
-	/*Extract elements and build the max again*/
+	/*Extract elements and build the heap max again*/
 	for (i = size - 1; i > 0; i--)
 	{
 		swap(&array[0], &array[i]);
 		print_array(array, size);
-		sift_down(array, i, 0);
+		sift_down(array, size, 0, i);
 	}
 }
