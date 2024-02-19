@@ -22,17 +22,16 @@ void swap(int *a, int *b)
  * @end: the end of the array
  * Return: the partiioned
 */
-int Hoare_partition_scheme(int *array, size_t size, int start, int end)
+int Hoare_partition_scheme(int *array, size_t size, int end, int start)
 {
-	int pivot = array[start];
-	int i, j;
+	int pivot, i, j;
 
-	for (i = end - 1, j = start + 1; i > j;)
+	pivot = array[start];
+	for (i = end - 1, j = start + 1; i < j;)
 	{
 		do {
 			i++;
 		} while (array[i] < pivot);
-
 		do {
 			j--;
 		} while (array[j] > pivot);
@@ -47,7 +46,6 @@ int Hoare_partition_scheme(int *array, size_t size, int start, int end)
 	return (i);
 }
 
-
 /**
  * quickSort - a function to implement the quickSort
  * @array: the array to work on
@@ -55,15 +53,15 @@ int Hoare_partition_scheme(int *array, size_t size, int start, int end)
  * @start: the beginning of the array
  * @end: the end of the array
 */
-
-void quickSort(int *array, size_t size, int start, int end)
+void quickSort(int *array, size_t size, int end, int start)
 {
-	if (start < end)
-	{
-		int pi = Hoare_partition_scheme(array, size, start, end);
+	int pi;
 
-		quickSort(array, size, start, pi - 1);
-		quickSort(array, size, pi, end);
+	if (start - end > 0)
+	{
+		pi = Hoare_partition_scheme(array, size, end, start);
+		quickSort(array, size, end, pi - 1);
+		quickSort(array, size, pi, start);
 	}
 }
 
@@ -75,8 +73,6 @@ void quickSort(int *array, size_t size, int start, int end)
  * @size: the size of the array
  * Return: void
 */
-
-
 void quick_sort_hoare(int *array, size_t size)
 {
 	if (array == NULL || size < 2)
