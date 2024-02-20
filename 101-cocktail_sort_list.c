@@ -40,8 +40,7 @@ void cocktail_sort_list(listint_t **list)
 	listint_t *start = *list;
 	listint_t *end = NULL;
 
-	if (list == NULL || *list == NULL || (*list)->next == NULL
-	 || (*list)->next->next == NULL)
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
 	while (swapped)
