@@ -40,6 +40,9 @@ void cocktail_sort_list(listint_t **list)
 	listint_t *start = *list;
 	listint_t *end = NULL;
 
+	if (!list || !*list || !(*list)->next ||
+			!((*list)->next->next))
+		return;
 	while (swapped)
 	{
 		swapped = 0;
@@ -59,7 +62,6 @@ void cocktail_sort_list(listint_t **list)
 		/* If no swap occurred, the list is sorted */
 		if (!swapped)
 			break;
-		/* Update the end pointer */
 		end = start;
 		/* Traverse from right to left: Backward */
 		while (start && start->prev != NULL)
@@ -71,9 +73,7 @@ void cocktail_sort_list(listint_t **list)
 				print_list(*list);
 			}
 			else
-			{
 				start = start->prev;
-			}
 		}
 	}
 }
